@@ -1,4 +1,3 @@
-from json import load
 import pytest
 from torch.utils.data import DataLoader
 from hkspell.dataset import SpellDataset

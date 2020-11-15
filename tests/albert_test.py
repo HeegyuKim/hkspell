@@ -1,6 +1,5 @@
 import pytest
 import torch
-from torch import dtype
 
 from hkspell.model import AlbertSpellCorrectorModel
 
