@@ -1,0 +1,8 @@
+pandas
+numpy
+matplotlib
+jupyter
+pytest
+torch
+transformers
+pytorch-ignite
