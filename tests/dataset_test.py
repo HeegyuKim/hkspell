@@ -3,15 +3,19 @@ from torch.utils.data import DataLoader
 from hkspell.dataset import SpellDataset
 
 
-def test_dataset():
-    ds = SpellDataset()
-    print(ds[0], ds.X[0], ds.y[0])
-    print(ds.X[20:25], ds.y[20:25])
+
+@pytest.fixture
+def dataset():
+    return SpellDataset({
+        "aple": ["able", "apple", "apply"],
+        "correctd": ["corrects", "correct"],
+        "helpp": ["help", "helped"]
+    })
 
 
-def test_dataset_with_loader():
-    ds = SpellDataset()
-    loader = DataLoader(ds, 10)
+def test_dataset_with_loader(dataset):
+    
+    loader = DataLoader(dataset, 2)
 
     X, y = next(iter(loader))
     print("with loader")
