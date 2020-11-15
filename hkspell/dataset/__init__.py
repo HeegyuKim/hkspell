@@ -9,13 +9,14 @@ from hkspell.util import EnglishCharacterEncoder
 
 
 class SpellDataset(Dataset):
-    def __init__(self) -> None:
+    def __init__(self, dataset=None) -> None:
         super().__init__()
 
         self.encoder = EnglishCharacterEncoder(max_len=16, add_padding=True)
 
-        with open("raw/dataset.json") as f:
-            dataset = json.load(f)
+        if dataset is None:
+            with open("raw/dataset.json") as f:
+                dataset = json.load(f)
 
         exp = re.compile(r"[^a-z]")
         errors = [k for k in dataset.keys() if not exp.search(k)]
