@@ -4,5 +4,5 @@ matplotlib
 jupyter
 pytest
 torch
-transformers
+# transformers
 pytorch-ignite
