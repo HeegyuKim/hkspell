@@ -1,4 +1,3 @@
-
 from hkspell.model import CNNModel
 from hkspell.dataset import SpellDataset
 
@@ -8,8 +7,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 
-
-def train(model, dataset, epochs = 1, dev="cuda"):
+def train(model, dataset, epochs=1, dev="cuda"):
     loader = DataLoader(dataset, 512, True)
     optimizer = torch.optim.Adam(model.parameters())
     criterion = torch.nn.BCELoss()
@@ -61,13 +59,14 @@ def main():
     dataset = SpellDataset()
     model = CNNModel(n_classes=dataset.encoder.num_classes)
     dev = "cuda"
-    
+
     model.to(dev)
 
     print("Start training...")
     train(model, dataset, 100)
 
     torch.save(model.state_dict(), "saved_models/test.pt")
+
 
 if __name__ == "__main__":
     main()
