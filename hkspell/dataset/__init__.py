@@ -28,4 +28,7 @@ class SpellDataset(Dataset):
     def __getitem__(self, index):
         X = self.encoder.encode(self.X[index])
         y = self.encoder.encode(self.y[index])
-        return torch.tensor(X), F.one_hot(torch.tensor(y), self.encoder.num_classes).float()
+        return (
+            torch.tensor(X),
+            F.one_hot(torch.tensor(y), self.encoder.num_classes).float(),
+        )

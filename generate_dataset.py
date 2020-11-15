@@ -19,7 +19,7 @@ def get_error_corrections(WORDS, errors, dataset, C):
     for e in errors:
         if e in dataset:
             continue
-        
+
         corr = nvs.corrections(WORDS, e, C)
         dataset[e] = corr
 
@@ -44,7 +44,7 @@ def main():
         process = Thread(target=get_errors, args=(WORDS, words, N, errors))
         process.start()
         processes.append(process)
-        
+
     for p in processes:
         p.join()
 
@@ -57,7 +57,9 @@ def main():
     for i in range(N_PROC):
         sub_errors = errors[i * num_errors : (i + 1) * num_errors]
 
-        process = Thread(target=get_error_corrections, args=(WORDS, sub_errors, dataset, C))
+        process = Thread(
+            target=get_error_corrections, args=(WORDS, sub_errors, dataset, C)
+        )
         process.start()
         processes.append(process)
 
@@ -65,9 +67,10 @@ def main():
         p.join()
 
     print("saving...")
-    
+
     with open("raw/dataset.json", "wt") as f:
         json.dump(dataset, f)
+
 
 if __name__ == "__main__":
     main()
