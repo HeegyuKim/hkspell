@@ -35,9 +35,8 @@ def test_corrections(checker: SymSpellChecker):
     for word, correct in zip(words, corrections):
         corrects = checker.corrections(word, 10, return_probabilities=True)
 
-        print(word, corrects)
-        # assert len(corrects) <= 10
-        # assert corrects[0][0] == correct
+        assert len(corrects) <= 10
+        assert corrects[0][0] == correct
 
 
 def test_words_contains(checker: SymSpellChecker):
