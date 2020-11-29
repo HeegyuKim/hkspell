@@ -3,6 +3,7 @@ numpy
 matplotlib
 jupyter
 pytest
+black
 torch
 # transformers
 pytorch-ignite

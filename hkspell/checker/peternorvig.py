@@ -4,7 +4,6 @@ from .base import BaseSpellChecker
 
 
 class PeterNorvigSpellChecker(BaseSpellChecker):
-
     def __init__(self, dictionary: Counter, letters: list):
         super().__init__()
         self.dictionary = dictionary
@@ -15,14 +14,19 @@ class PeterNorvigSpellChecker(BaseSpellChecker):
         "Probability of `word`."
         return self.dictionary[word] / self.sum
 
-    def corrections(self, word: str, num_result: int = 1, return_probabilities: bool = False) -> list:
+    def corrections(
+        self, word: str, num_result: int = 1, return_probabilities: bool = False
+    ) -> list:
         "Most probable spelling correction for word."
-        result = sorted(self.candidates(word),
-                      key=lambda x: self.probability_of(x),
-                      reverse=True)[:num_result]
+        result = sorted(
+            self.candidates(word), key=lambda x: self.probability_of(x), reverse=True
+        )[:num_result]
 
-        return [(x, self.probability_of(x)) for x in result] if return_probabilities \
+        return (
+            [(x, self.probability_of(x)) for x in result]
+            if return_probabilities
             else result
+        )
 
     def candidates(self, word: str) -> list:
         "Generate possible spelling corrections for word."
@@ -59,4 +63,3 @@ def from_english_text(text, letters=None) -> PeterNorvigSpellChecker:
     checker = PeterNorvigSpellChecker(Counter(words), letters)
 
     return checker
-
